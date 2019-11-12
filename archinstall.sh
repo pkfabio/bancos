@@ -88,7 +88,7 @@ END
 echo ">> Atualizando a lista de mirrors..."
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.BAK
 reflector --latest 200 --age 12 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
-echo ">> Configurando hook para updates da lista de mirrors...
+echo ">> Configurando hook para updates da lista de mirrors..."
 touch /etc/pacman.d/hooks/mirrors-update.hook
 tee -a /etc/pacman.d/hooks/mirrors-update.hook << END
 [Trigger]
