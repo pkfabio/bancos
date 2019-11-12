@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 linux="linux"
-root_passwd="140182"
-user_passwd="140182"
+root_passwd=""
+user_passwd=""
 hostname="arch"
 username="pk"
 locale="pt_BR"
