@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+#################
+### Variáveis ### 
+#################
+
 root_passwd=""
 user_passwd=""
 kernel="linux-lts"
@@ -9,66 +13,76 @@ locale="pt_BR"
 timezone="America/Sao_Paulo"
 keyboard="br-abnt2"
 
-echo ":: Atualizando relogio do sistema.."
-timedatectl set-ntp true 2&>1
+############################
+### Script de instalação ###
+############################
 
-echo ":: Montando partições.."
-mount /dev/sda2 /mnt 2&>1
-mkdir /mnt/{boot,home} 2&>1
-mount /dev/sda1 /mnt/boot 2&>1
-mount /dev/sda3 /mnt/home 2&>1
+echo "arch~> Atualizando relogio do sistema.."
+timedatectl set-ntp true
 
-echo ":: Instalando pacotes base do ArchLinux.."
+echo "arch~> Montando partições.."
+mount /dev/sda2 /mnt 
+mkdir /mnt/{boot,home}
+mount /dev/sda1 /mnt/boot
+mount /dev/sda3 /mnt/home
+
+echo "arch~> Instalando pacotes base do ArchLinux.."
 pacstrap /mnt base base-devel $kernel $kernel-headers linux-firmware networkmanager wget git reflector sudo bash-completion cronie xorg-server xorg-xinit 2&>1
 
-echo ":: Gerando o fstab.."
+echo "arch~> Gerando o fstab.."
 genfstab -U /mnt >> /mnt/etc/fstab 2&>1
 
 rootID=$(lsblk -no UUID /dev/sda2)
 
-echo ":: Copiando git de instalação para o sistema novo.."
+echo "arch~> Copiando git de instalação para o sistema novo.."
 cp -r $(pwd) /mnt/root/
 
-echo ":: Entrando em modo chroot.."
+echo "arch~> Entrando em modo chroot.."
 arch-chroot /mnt /bin/bash <<EOF
 
-echo ":: chroot~> Configurando novo sitema.."
+echo "arch/chroot~> Configurando novo sitema.."
 
-echo ":: chroot~> Setando relógio do sistema.."
+echo "arch/chroot~> Setando timezone.."
 ln -sf /usr/share/zoneinfo/$timezone /mnt/localtime 2&>1
+
+echo "arch/chroot~> Setando relógio do sistema.."
+timedatectl set-ntp true
 hwclock --systohc --localtime 2&>1
 
-echo ":: chroot~> Setando os locales.."
+echo "arch/chroot~> Setando os locales.."
 echo "$locale.UTF-8 UTF-8" >> /etc/locale.gen 2&>1
 echo "LANG=$locale.UTF-8" >> /etc/locale.conf 2&>1
 echo "LC_COLLATE=C" >> /etc/locale.conf 2&>1
 locale-gen 2&>1
 
-echo ":: chroot~> Configurando telcado.."
+echo "arch/chroot~> Setando teclado.."
 echo "KEYMAP=$keyboard" > /etc/vconsole.conf 2&>1
 
-echo ":: chroot~> Setando o hostname.."
+echo "arch/chroot~> Setando o hostname.."
 echo $hostname > /etc/hostname 2&>1
 
-echo ":: chroot~> Setando senha de root.."
+echo "arch/chroot~> Setando senha de root.."
 echo -en "$root_passwd\n$root_passwd" | passwd 2&>1
 
-echo ":: chroot~> Criando novo usuário.."
+echo "arch/chroot~> Criando novo usuário.."
 useradd -m -G wheel -s /bin/bash $username 2&>1
 usermod -a -G video $username 2&>1
+
+echo "arch/chroot~> Setando senha de $username.."
 echo -en "$user_passwd\n$user_passwd" | passwd $username 2&>1
 
-echo ":: chroot~> Gerando initramfs.."
+echo "arch/chroot~> Gerando initramfs.."
 mkinitcpio -p $kernel 2&>1
 
-echo ":: chroot~> Configurando boot do sytemd.."
+echo "arch/chroot~> Configurando boot do sytemd.."
 bootctl --path=/boot install 2&>1
-echo "" > /boot/loader/loader.conf 2&>1
+echo "" > /boot/loader/loader.conf
 tee -a /boot/loader/loader.conf << END
 default arch
 timeout 1
 editor 0
 END
+
 touch /boot/loader/entries/arch.conf 
 tee -a /boot/loader/entries/arch.conf << END
 title ArchLinux
@@ -78,7 +92,7 @@ initrd /initramfs-$kernel.img
 options root=UUID=$rootID rw
 END
 
-echo ":: chroot~> Configurando hook para updates do systemd-boot.."
+echo "arch/chroot~> Configurando hook para updates do systemd-boot.."
 mkdir -p /etc/pacman.d/hooks/
 touch /etc/pacman.d/hooks/systemd-boot.hook
 tee -a /etc/pacman.d/hooks/systemd-boot.hook << END
@@ -93,10 +107,11 @@ When = PostTransaction
 Exec = /usr/bin/bootctl update
 END
 
-echo ":: chroot~> Atualizando a lista de mirrors.."
+echo "arch/chroot~> Atualizando a lista de mirrors.."
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.BAK 2&>1
 reflector --latest 20 --protocol https --sort rate --save /etc/pacman.d/mirrorlist 2&>1
-echo ":: chroot~> Configurando hook para updates da lista de mirrors.." 
+
+echo "arch/chroot~> Configurando hook para updates da lista de mirrors.." 
 touch /etc/pacman.d/hooks/mirrors-update.hook 
 tee -a /etc/pacman.d/hooks/mirrors-update.hook << END
 [Trigger]
@@ -111,17 +126,36 @@ Depends = reflector
 Exec = /bin/sh -c "reflector --latest 20 --protocol https --sort rate --save /etc/pacman.d/mirrorlist"
 END
 
-echo ":: chroot~> Habilitando periodic TRIM..."
+echo "arch/chroot~> Habilitando periodic TRIM..."
 systemctl enable fstrim.timer 2&>1
 
-echo ":: chroot~> Habilitando NetworkManager..."
+echo "arch/chroot~> Habilitando NetworkManager..."
 systemctl enable NetworkManager 2&>1
 
-echo ":: chroot~> Adicionando usuário como sudoer"
+echo "arch/chroot~> Adicionando usuário como sudoer"
 echo '%wheel ALL=(ALL) ALL' | EDITOR='tee -a' visudo
-echo ":: chroot~> Novo sistema configurado.."
 
-echo ":: chroot~> Habilitando login automático para $username
+echo "arch/chroot~> Novo sistema configurado.."
+
+echo "arch/chroot~> Instalando gerenciador de janelas, menu dinamico e terminal.."
+git clone https://git.suckless.org/dwm 2&>1
+git clone https://git.suckless.org/dmenu 2&>1
+git clone https://git.suckless.org/st 2&>1
+cd dwm
+cp ../dwm.h . 
+cp ../config.def.h . 
+make clean install 2&>1
+cd ../dmenu
+make clean install 2&>1
+cd ../st
+make clean install 2&>1
+cd ..
+
+echo "arch/chroot~> Setando inicialização do ambiente visual..."
+echo "exec dwm" > /home/$username/.xinitrc
+chown $username /home/$username/.xinitrc
+
+echo "arch/chroot~> Habilitando login automático para $username
 touch /etc/systemd/system/getty@tty1.service.d/autologin.conf
 tee -a /etc/systemd/system/getty@tty1.service.d/autologin.conf << END
 [Service]
@@ -131,12 +165,11 @@ Type=simple
 Environment=XDG_SESSION_TYPE=x11
 END
 
-echo ":: chroot~> Saindo do modo chroot.."
+echo "arch\chroot~> Saindo do modo chroot.."
 
 EOF
 echo
-echo ":: Desmontando partições.."
+echo "arch~> Desmontando partições.."
 umount -R /mnt 2&>1
 
-echo ""
-echo ":: ArchLinux instaldo.."
+echo "arch~> ArchLinux instalado.."
