@@ -144,9 +144,6 @@ systemctl enable NetworkManager 2&>1
 echo "arch/chroot~> Adicionando usuário como sudoer"
 echo '%wheel ALL=(ALL) ALL' | EDITOR='tee -a' visudo
 
-echo "arch/chroot~> Habilitando serviço do virtualbox na inicialização.."
-systemctl enable vboxservice.service 2&>1
-
 echo "arch/chroot~> Instalando AUR Helper (paru).."
 git clone https://aur.archlinux.org/paru.git 2&>1
 cd paru
@@ -167,8 +164,9 @@ cd ../st
 make clean install 2&>1
 cd ..
 
-echo "arch/chroot~> Instalando browser Librewolf.."
+echo "arch/chroot~> Instalando browser Librewolf e warsaw.."
 paru -S librewolf-bin 2&>1
+paru -S warsaw-bin 2&>1
 
 echo "arch/chroot~> Setando inicialização do ambiente visual..."
 su - $username -c echo "exec dwm" > /home/$username/.xinitrc
@@ -193,6 +191,10 @@ ExecStart=-/sbin/agetty -o '-p -f -- \\u' --noclear --autologin $username %I $TE
 Type=simple
 Environment=XDG_SESSION_TYPE=x11
 END
+
+echo "arch/chroot~> Habilitando serviços na inicialização.."
+systemctl enable vboxservice.service 2&>1
+systemctl enable warsaw.service 2&>1
 
 echo "arch/chroot~> Novo sistema configurado, saindo do modo chroot.."
 
