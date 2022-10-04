@@ -167,6 +167,8 @@ cd ..
 echo "arch/chroot~> Instalando browser Librewolf e warsaw.."
 paru -S librewolf-bin 2&>1
 paru -S warsaw-bin 2&>1
+cp certificado /home/$username
+chown $username /home/$username/certificado 2&>1
 
 echo "arch/chroot~> Setando inicialização do ambiente visual..."
 su - $username -c echo "exec dwm" > /home/$username/.xinitrc
