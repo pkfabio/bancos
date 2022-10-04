@@ -27,7 +27,7 @@ parted -s $disk \
     mkpart primary fat32 1 301 \
     -- mkpart primary ext4 301 -0 \
     set 1 esp on
-mkfs.fat -f32 -n "Boot" $disk\1 1>/dev/null
+mkfs.fat -F32 -n "Boot" $disk\1 1>/dev/null
 mkfs.ext4 $disk\2 -L Root 1>/dev/null
 
 echo "arch~> Montando partições.."
