@@ -22,11 +22,11 @@ echo "arch~> Atualizando relogio do sistema.."
 timedatectl set-ntp true 2&>1
 
 echo "arch~> Criando partições.."
-parted -script $disk \
-  mklabel gpt \
-  mkpart primary fat32 1 301 \
-  set 1 esp on \
-  mkpart primary ext4 301 -0 
+parted -s $disk \
+    mklabel gpt \
+    mkpart primary fat32 1 301 \
+    -- mkpart primary ext4 301 -0 \
+    set 1 esp on
 mkfs.fat -f32 -n "Boot" $disk\1 1>/dev/null
 mkfs.ext4 $disk\2 -L Root 1>/dev/null
 
