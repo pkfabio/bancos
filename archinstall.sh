@@ -6,6 +6,7 @@
 
 root_passwd=""
 user_passwd=""
+disk="/dev/sda"
 kernel="linux-lts"
 hostname="bancos"
 username="bancos"
@@ -18,21 +19,26 @@ keyboard="br-abnt2"
 ############################
 
 echo "arch~> Atualizando relogio do sistema.."
-timedatectl set-ntp true
+timedatectl set-ntp true 2&>1
+
+echo "arch~> Criando partições.."
+parted -s $disk mkpart primary fat32 1 301 1>/dev/null
+parted -s $disk set 1 esp on 1>/dev/null
+parted -s $disk mkpart primary ext4 301 -0 1>/dev/null
+mkfs.fat -f32 -n "Boot" $disk\1 1>/dev/null
+mkfs.ext4 $disk\2 -L Root 1>/dev/null
 
 echo "arch~> Montando partições.."
-mount /dev/sda2 /mnt 
-mkdir /mnt/{boot,home}
-mount /dev/sda1 /mnt/boot
-mount /dev/sda3 /mnt/home
+rootID=$(lsblk -no UUID $disk\2)
+mount $disk\2 /mnt 
+mkdir /mnt/boot
+mount $disk\1 /mnt/boot
 
 echo "arch~> Instalando pacotes base do ArchLinux.."
-pacstrap /mnt base base-devel $kernel $kernel-headers linux-firmware networkmanager wget git reflector sudo bash-completion cronie xorg-server xorg-xinit 2&>1
+pacstrap /mnt base base-devel $kernel $kernel-headers linux-firmware networkmanager wget git reflector sudo bash-completion cronie xorg-server xorg-xinit numlockx virtualbox-guest-utils 2&>1
 
 echo "arch~> Gerando o fstab.."
 genfstab -U /mnt >> /mnt/etc/fstab 2&>1
-
-rootID=$(lsblk -no UUID /dev/sda2)
 
 echo "arch~> Copiando git de instalação para o sistema novo.."
 cp -r $(pwd) /mnt/root/
@@ -40,13 +46,16 @@ cp -r $(pwd) /mnt/root/
 echo "arch~> Entrando em modo chroot.."
 arch-chroot /mnt /bin/bash <<EOF
 
+echo "arch/chroot~> Verificando atualizações do novo sitema.."
+pacman -Syyu --noconfirm 2&>1
+
 echo "arch/chroot~> Configurando novo sitema.."
 
 echo "arch/chroot~> Setando timezone.."
 ln -sf /usr/share/zoneinfo/$timezone /mnt/localtime 2&>1
 
 echo "arch/chroot~> Setando relógio do sistema.."
-timedatectl set-ntp true
+timedatectl set-ntp true 2&>1
 hwclock --systohc --localtime 2&>1
 
 echo "arch/chroot~> Setando os locales.."
@@ -79,7 +88,7 @@ bootctl --path=/boot install 2&>1
 echo "" > /boot/loader/loader.conf
 tee -a /boot/loader/loader.conf << END
 default arch
-timeout 1
+timeout 0
 editor 0
 END
 
@@ -135,14 +144,21 @@ systemctl enable NetworkManager 2&>1
 echo "arch/chroot~> Adicionando usuário como sudoer"
 echo '%wheel ALL=(ALL) ALL' | EDITOR='tee -a' visudo
 
-echo "arch/chroot~> Novo sistema configurado.."
+echo "arch/chroot~> Habilitando serviço do virtualbox na inicialização.."
+systemctl enable vboxservice.service 2&>1
+
+echo "arch/chroot~> Instalando AUR Helper (paru).."
+git clone https://aur.archlinux.org/paru.git 2&>1
+cd paru
+makepkg -si 2&>1
+cd ..
 
 echo "arch/chroot~> Instalando gerenciador de janelas, menu dinamico e terminal.."
 git clone https://git.suckless.org/dwm 2&>1
 git clone https://git.suckless.org/dmenu 2&>1
 git clone https://git.suckless.org/st 2&>1
 cd dwm
-cp ../dwm.h . 
+cp ../dwm.c . 
 cp ../config.def.h . 
 make clean install 2&>1
 cd ../dmenu
@@ -151,9 +167,22 @@ cd ../st
 make clean install 2&>1
 cd ..
 
+echo "arch/chroot~> Instalando browser Librewolf.."
+paru -S librewolf-bin 2&>1
+
 echo "arch/chroot~> Setando inicialização do ambiente visual..."
-echo "exec dwm" > /home/$username/.xinitrc
-chown $username /home/$username/.xinitrc
+su - $username -c echo "exec dwm" > /home/$username/.xinitrc
+su - $username -c mkdir -p /home/$username/.config/dwm/
+su - $username -c touch /home/$username/.config/dwm/autostart.sh
+su - $username -c tee -a /home/$username/.config/dwm/autostart.sh << END
+numlockx &
+VBoxClient-All &
+xrandr --output 1600x900 --pos 0x0 --rotate normal &
+librewolf
+shutdown -h now
+END
+su - $username -c chmod +x /home/$username/.config/dwm/autostart.sh
+su - $username -c localectl set-x11-keymap br abnt2
 
 echo "arch/chroot~> Habilitando login automático para $username
 touch /etc/systemd/system/getty@tty1.service.d/autologin.conf
@@ -165,7 +194,7 @@ Type=simple
 Environment=XDG_SESSION_TYPE=x11
 END
 
-echo "arch\chroot~> Saindo do modo chroot.."
+echo "arch/chroot~> Novo sistema configurado, saindo do modo chroot.."
 
 EOF
 echo
