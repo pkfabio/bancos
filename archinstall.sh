@@ -19,7 +19,7 @@ keyboard="br-abnt2"
 ############################
 
 echo "arch~> Atualizando relogio do sistema.."
-timedatectl set-ntp true 2&>1
+timedatectl set-ntp true 
 
 echo "arch~> Criando partições.."
 parted -s $disk \
@@ -37,10 +37,10 @@ mkdir /mnt/boot
 mount $disk\1 /mnt/boot
 
 echo "arch~> Instalando pacotes base do ArchLinux.."
-pacstrap /mnt base base-devel $kernel $kernel-headers linux-firmware networkmanager wget git reflector sudo bash-completion cronie xorg-server xorg-xinit numlockx virtualbox-guest-utils 2&>1
+pacstrap /mnt base base-devel $kernel $kernel-headers linux-firmware networkmanager wget git reflector sudo bash-completion cronie xorg-server xorg-xinit numlockx virtualbox-guest-utils 
 
 echo "arch~> Gerando o fstab.."
-genfstab -U /mnt >> /mnt/etc/fstab 2&>1
+genfstab -U /mnt >> /mnt/etc/fstab 
 
 echo "arch~> Copiando git de instalação para o sistema novo.."
 cp -r $(pwd) /mnt/root/
@@ -49,44 +49,44 @@ echo "arch~> Entrando em modo chroot.."
 arch-chroot /mnt /bin/bash <<EOF
 
 echo "arch/chroot~> Verificando atualizações do novo sitema.."
-pacman -Syyu --noconfirm 2&>1
+pacman -Syyu --noconfirm 
 
 echo "arch/chroot~> Configurando novo sitema.."
 
 echo "arch/chroot~> Setando timezone.."
-ln -sf /usr/share/zoneinfo/$timezone /mnt/localtime 2&>1
+ln -sf /usr/share/zoneinfo/$timezone /mnt/localtime 
 
 echo "arch/chroot~> Setando relógio do sistema.."
-timedatectl set-ntp true 2&>1
-hwclock --systohc --localtime 2&>1
+timedatectl set-ntp true 
+hwclock --systohc --localtime 
 
 echo "arch/chroot~> Setando os locales.."
-echo "$locale.UTF-8 UTF-8" >> /etc/locale.gen 2&>1
-echo "LANG=$locale.UTF-8" >> /etc/locale.conf 2&>1
-echo "LC_COLLATE=C" >> /etc/locale.conf 2&>1
-locale-gen 2&>1
+echo "$locale.UTF-8 UTF-8" >> /etc/locale.gen 
+echo "LANG=$locale.UTF-8" >> /etc/locale.conf 
+echo "LC_COLLATE=C" >> /etc/locale.conf 
+locale-gen 
 
 echo "arch/chroot~> Setando teclado.."
-echo "KEYMAP=$keyboard" > /etc/vconsole.conf 2&>1
+echo "KEYMAP=$keyboard" > /etc/vconsole.conf 
 
 echo "arch/chroot~> Setando o hostname.."
-echo $hostname > /etc/hostname 2&>1
+echo $hostname > /etc/hostname 
 
 echo "arch/chroot~> Setando senha de root.."
-echo -en "$root_passwd\n$root_passwd" | passwd 2&>1
+echo -en "$root_passwd\n$root_passwd" | passwd 
 
 echo "arch/chroot~> Criando novo usuário.."
-useradd -m -G wheel -s /bin/bash $username 2&>1
-usermod -a -G video $username 2&>1
+useradd -m -G wheel -s /bin/bash $username 
+usermod -a -G video $username 
 
 echo "arch/chroot~> Setando senha de $username.."
-echo -en "$user_passwd\n$user_passwd" | passwd $username 2&>1
+echo -en "$user_passwd\n$user_passwd" | passwd $username 
 
 echo "arch/chroot~> Gerando initramfs.."
-mkinitcpio -p $kernel 2&>1
+mkinitcpio -p $kernel 
 
 echo "arch/chroot~> Configurando boot do sytemd.."
-bootctl --path=/boot install 2&>1
+bootctl --path=/boot install 
 echo "" > /boot/loader/loader.conf
 tee -a /boot/loader/loader.conf << END
 default arch
@@ -119,8 +119,8 @@ Exec = /usr/bin/bootctl update
 END
 
 echo "arch/chroot~> Atualizando a lista de mirrors.."
-cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.BAK 2&>1
-reflector --latest 20 --protocol https --sort rate --save /etc/pacman.d/mirrorlist 2&>1
+cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.BAK 
+reflector --latest 20 --protocol https --sort rate --save /etc/pacman.d/mirrorlist 
 
 echo "arch/chroot~> Configurando hook para updates da lista de mirrors.." 
 touch /etc/pacman.d/hooks/mirrors-update.hook 
@@ -138,39 +138,39 @@ Exec = /bin/sh -c "reflector --latest 20 --protocol https --sort rate --save /et
 END
 
 echo "arch/chroot~> Habilitando periodic TRIM..."
-systemctl enable fstrim.timer 2&>1
+systemctl enable fstrim.timer 
 
 echo "arch/chroot~> Habilitando NetworkManager..."
-systemctl enable NetworkManager 2&>1
+systemctl enable NetworkManager 
 
 echo "arch/chroot~> Adicionando usuário como sudoer"
 echo '%wheel ALL=(ALL) ALL' | EDITOR='tee -a' visudo
 
 echo "arch/chroot~> Instalando AUR Helper (paru).."
-git clone https://aur.archlinux.org/paru.git 2&>1
+git clone https://aur.archlinux.org/paru.git 
 cd paru
-makepkg -si 2&>1
+makepkg -si 
 cd ..
 
 echo "arch/chroot~> Instalando gerenciador de janelas, menu dinamico e terminal.."
-git clone https://git.suckless.org/dwm 2&>1
-git clone https://git.suckless.org/dmenu 2&>1
-git clone https://git.suckless.org/st 2&>1
+git clone https://git.suckless.org/dwm 
+git clone https://git.suckless.org/dmenu 
+git clone https://git.suckless.org/st 
 cd dwm
 cp ../dwm.c . 
 cp ../config.def.h . 
-make clean install 2&>1
+make clean install 
 cd ../dmenu
-make clean install 2&>1
+make clean install 
 cd ../st
-make clean install 2&>1
+make clean install 
 cd ..
 
 echo "arch/chroot~> Instalando browser Librewolf e warsaw.."
-paru -S librewolf-bin 2&>1
-paru -S warsaw-bin 2&>1
+paru -S librewolf-bin 
+paru -S warsaw-bin 
 cp certificado /home/$username
-chown $username /home/$username/certificado 2&>1
+chown $username /home/$username/certificado 
 
 echo "arch/chroot~> Setando inicialização do ambiente visual..."
 su - $username -c echo "exec dwm" > /home/$username/.xinitrc
@@ -197,14 +197,14 @@ Environment=XDG_SESSION_TYPE=x11
 END
 
 echo "arch/chroot~> Habilitando serviços na inicialização.."
-systemctl enable vboxservice.service 2&>1
-systemctl enable warsaw.service 2&>1
+systemctl enable vboxservice.service 
+systemctl enable warsaw.service 
 
 echo "arch/chroot~> Novo sistema configurado, saindo do modo chroot.."
 
 EOF
 echo
 echo "arch~> Desmontando partições.."
-umount -R /mnt 2&>1
+umount -R /mnt 
 
 echo "arch~> ArchLinux instalado.."
