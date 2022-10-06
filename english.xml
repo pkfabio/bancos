@@ -463,18 +463,18 @@
     <RecordThing>
       <Key>ApplianceMicrowave</Key>
       <Value>Micro-ondas</Value>
-      <Description>While countless 'better' ways of cooking {LINK:FoodPage;Food} have been invented in the last few hundred years, few are as durable or easy to fabricate as the OK-Zoomer microwave. Licensed from {LINK:Xigo;Xigo}, the plans are based on a classic model from the mid-21st century, giving it a charmingly retro feel. But don't worry, it oscillates {GAS:Water} molecules more than adequately. 
-Just bolt it to a {THING:StructureBench} using a {THING:ItemWrench} to power it, follow the recipe, and you're cooking.</Description>
+      <Description>Embora inúmeras maneiras 'melhores' de cozinhar {LINK:FoodPage;Food} tenham sido inventadas nos últimos cem anos, poucas são tão duráveis ou fáceis de fabricar quanto o micro-ondas OK-Zoomer. Licenciado pela {LINK:Xigo;Xigo}, os planos são baseados em um modelo clássico de meados do século 21, dando-lhe um charme retrô. Mas não se preocupe, ele oscila as moléculas {GAS:Water} mais do que adequadamente.
+Basta prendê-lo a uma {THING:StructureBench} usando uma {THING:ItemWrench} para conectá-lo, seguir a receita e você está cozinhando.</Description>
     </RecordThing>
     <RecordThing>
       <Key>ApplianceReagentProcessor</Key>
-      <Value>Reagent Processor</Value>
-      <Description>Sitting somewhere between a high powered juicer and an alchemist's alembic, the {LINK:Xigo;Xigo} reagent processor turns certain raw materials and food items into cooking and crafting ingredients. Indispensible in any space kitchen, just bolt it to the bench, and you're ready to go.</Description>
+      <Value>Processador de reagentes</Value>
+      <Description>Situado em algum lugar entre um espremedor de alta potência e o alambique de um alquimista, o processador de reagentes {LINK:Xigo;Xigo} transforma certas matérias-primas e comidas em ingredientes e alimentos. Indispensável em qualquer cozinha espacial, basta aparafusá-lo à bancada e está pronto a usar.</Description>
     </RecordThing>
     <RecordThing>
       <Key>BodyPartAstronautFemaleArmL</Key>
-      <Value>Body Part Astronaut Female Arm</Value>
-      <Description>As far as left arms go, this is an acceptable, if slightly forgettable example of its kind. It's seen better days.</Description>
+      <Value>Parte do corpo Braço de Astronauta Feminina E</Value>
+      <Description>No que diz respeito aos braços esquerdos, este é um exemplo aceitável, embora um pouco esquecível de seu tipo. Já viu dias melhores.</Description>
     </RecordThing>
     <RecordThing>
       <Key>BodyPartAstronautFemaleArmR</Key>
