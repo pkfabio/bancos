@@ -1,72 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Language xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Name>English</Name>
-  <Code>EN</Code>
-  <Font>font_english</Font>
+  <Name>Brazilian Portuguese</Name>
+  <Code>PTBR</Code>
   <Reagents>
     <RecordReagent>
       <Key>Flour</Key>
-      <Value>Flour</Value>
+      <Value>Farinha</Value>
       <Unit>g</Unit>
     </RecordReagent>
     <RecordReagent>
       <Key>Milk</Key>
-      <Value>Milk</Value>
+      <Value>Leite</Value>
       <Unit>ml</Unit>
     </RecordReagent>
     <RecordReagent>
       <Key>Egg</Key>
-      <Value>Egg</Value>
+      <Value>Ovo</Value>
       <Unit />
     </RecordReagent>
     <RecordReagent>
       <Key>Iron</Key>
-      <Value>Iron</Value>
+      <Value>Ferro</Value>
       <Unit>g</Unit>
     </RecordReagent>
     <RecordReagent>
       <Key>Gold</Key>
-      <Value>Gold</Value>
+      <Value>Ouro</Value>
       <Unit>g</Unit>
     </RecordReagent>
     <RecordReagent>
       <Key>Carbon</Key>
-      <Value>Carbon</Value>
+      <Value>Carbono</Value>
       <Unit>g</Unit>
     </RecordReagent>
     <RecordReagent>
       <Key>Uranium</Key>
-      <Value>Uranium</Value>
+      <Value>Urânio</Value>
       <Unit>g</Unit>
     </RecordReagent>
     <RecordReagent>
       <Key>Copper</Key>
-      <Value>Copper</Value>
+      <Value>Cobre</Value>
       <Unit>g</Unit>
     </RecordReagent>
     <RecordReagent>
       <Key>Steel</Key>
-      <Value>Steel</Value>
+      <Value>Aço</Value>
       <Unit>g</Unit>
     </RecordReagent>
     <RecordReagent>
       <Key>Hydrocarbon</Key>
-      <Value>Hydrocarbon</Value>
+      <Value>Hidrocarboneto</Value>
       <Unit>g</Unit>
     </RecordReagent>
     <RecordReagent>
       <Key>Silver</Key>
-      <Value>Silver</Value>
+      <Value>Prata</Value>
       <Unit>g</Unit>
     </RecordReagent>
     <RecordReagent>
       <Key>Nickel</Key>
-      <Value>Nickel</Value>
+      <Value>Níquel</Value>
       <Unit>g</Unit>
     </RecordReagent>
     <RecordReagent>
       <Key>Lead</Key>
-      <Value>Lead</Value>
+      <Value>Chumbo</Value>
       <Unit>g</Unit>
     </RecordReagent>
     <RecordReagent>
@@ -91,77 +90,77 @@
     </RecordReagent>
     <RecordReagent>
       <Key>Plastic</Key>
-      <Value>Plastic</Value>
+      <Value>Plástico</Value>
       <Unit>g</Unit>
     </RecordReagent>
     <RecordReagent>
       <Key>Silicon</Key>
-      <Value>Silicon</Value>
+      <Value>Silicone</Value>
       <Unit>g</Unit>
     </RecordReagent>
     <RecordReagent>
       <Key>SalicylicAcid</Key>
-      <Value>Salicylic Acid</Value>
+      <Value>Ácido salicílico</Value>
       <Unit>g</Unit>
     </RecordReagent>
     <RecordReagent>
       <Key>Alcohol</Key>
-      <Value>Alcohol</Value>
+      <Value>Álcool</Value>
       <Unit>ml</Unit>
     </RecordReagent>
     <RecordReagent>
       <Key>Oil</Key>
-      <Value>Oil</Value>
+      <Value>Óleo</Value>
       <Unit>ml</Unit>
     </RecordReagent>
     <RecordReagent>
       <Key>Potato</Key>
-      <Value>Potato</Value>
+      <Value>Batata</Value>
       <Unit />
     </RecordReagent>
     <RecordReagent>
       <Key>Tomato</Key>
-      <Value>Tomato</Value>
+      <Value>Tomate</Value>
       <Unit />
     </RecordReagent>
     <RecordReagent>
       <Key>Fenoxitone</Key>
-      <Value>Fenoxitone</Value>
+      <Value>Fenoxitona</Value>
       <Unit>g</Unit>
     </RecordReagent>
     <RecordReagent>
       <Key>ColorRed</Key>
-      <Value>Red Coloring</Value>
+      <Value>Tinta vermelha</Value>
       <Unit>g</Unit>
     </RecordReagent>
     <RecordReagent>
       <Key>ColorGreen</Key>
-      <Value>Green Coloring</Value>
+      <Value>Tinta verde</Value>
       <Unit>g</Unit>
     </RecordReagent>
     <RecordReagent>
       <Key>ColorBlue</Key>
-      <Value>Blue Coloring</Value>
+      <Value>Tinta azul</Value>
       <Unit>g</Unit>
     </RecordReagent>
     <RecordReagent>
       <Key>ColorYellow</Key>
-      <Value>Yellow Coloring</Value>
+      <Value>Tinta Amarela</Value>
       <Unit>g</Unit>
     </RecordReagent>
     <RecordReagent>
       <Key>ColorOrange</Key>
-      <Value>Orange Coloring</Value>
+      <Value>Tinta laranja</Value>
       <Unit>g</Unit>
     </RecordReagent>
     <RecordReagent>
       <Key>Pumpkin</Key>
-      <Value>Pumpkin</Value>
+      <Value>Abóbora</Value>
       <Unit />
     </RecordReagent>
     <RecordReagent>
       <Key>Rice</Key>
-      <Value>Rice</Value>
+      <Value>Arroz</Value>
       <Unit>g</Unit>
     </RecordReagent>
     <RecordReagent>
@@ -191,197 +190,197 @@
     </RecordReagent>
     <RecordReagent>
       <Key>Cobalt</Key>
-      <Value>Cobalt</Value>
+      <Value>Cobalto</Value>
       <Unit>g</Unit>
     </RecordReagent>
     <RecordReagent>
       <Key>Corn</Key>
-      <Value>Corn</Value>
+      <Value>Milho</Value>
       <Unit />
     </RecordReagent>
     <RecordReagent>
       <Key>Wheat</Key>
-      <Value>Wheat</Value>
+      <Value>Trigo</Value>
       <Unit />
     </RecordReagent>
     <RecordReagent>
       <Key>Biomass</Key>
-      <Value>Biomass</Value>
+      <Value>Biomassa</Value>
       <Unit />
     </RecordReagent>
     <RecordReagent>
       <Key>Soy</Key>
-      <Value>Soy</Value>
+      <Value>Soja</Value>
       <Unit />
     </RecordReagent>
     <RecordReagent>
       <Key>Mushroom</Key>
-      <Value>Mushroom</Value>
+      <Value>Cogumelo</Value>
       <Unit>g</Unit>
     </RecordReagent>
   </Reagents>
   <Gases>
     <Record>
       <Key>Oxygen</Key>
-      <Value>Oxygen</Value>
+      <Value>Oxigênio</Value>
     </Record>
     <Record>
       <Key>CarbonDioxide</Key>
-      <Value>Carbon Dioxide</Value>
+      <Value>Dióxido de carbono</Value>
     </Record>
     <Record>
       <Key>Nitrogen</Key>
-      <Value>Nitrogen</Value>
+      <Value>Nitrogênio</Value>
     </Record>
     <Record>
       <Key>Volatiles</Key>
-      <Value>Volatiles</Value>
+      <Value>Voláteis</Value>
     </Record>
     <Record>
       <Key>Pollutant</Key>
-      <Value>Pollutant</Value>
+      <Value>Poluente</Value>
     </Record>
     <Record>
       <Key>Water</Key>
-      <Value>Water</Value>
+      <Value>Água</Value>
     </Record>
     <Record>
       <Key>NitrousOxide</Key>
-      <Value>Nitrous Oxide</Value>
+      <Value>Óxido nitroso</Value>
     </Record>
   </Gases>
   <Actions>
     <Record>
       <Key>Reload</Key>
-      <Value>Reload</Value>
+      <Value>Recarregar</Value>
     </Record>
     <Record>
       <Key>Paint</Key>
-      <Value>Paint</Value>
+      <Value>Pintar</Value>
     </Record>
     <Record>
       <Key>Mine</Key>
-      <Value>Mine</Value>
+      <Value>Mineirar</Value>
     </Record>
     <Record>
       <Key>Swap</Key>
-      <Value>Swap</Value>
+      <Value>Trocar</Value>
     </Record>
     <Record>
       <Key>Clear</Key>
-      <Value>Clear</Value>
+      <Value>Limpar</Value>
     </Record>
     <Record>
       <Key>Collect</Key>
-      <Value>Collect</Value>
+      <Value>Coletar</Value>
     </Record>
     <Record>
       <Key>Add</Key>
-      <Value>Add</Value>
+      <Value>Adicionar</Value>
     </Record>
     <Record>
       <Key>Insert</Key>
-      <Value>Insert</Value>
+      <Value>Inserir</Value>
     </Record>
     <Record>
       <Key>Remove</Key>
-      <Value>Remove</Value>
+      <Value>Remover</Value>
     </Record>
     <Record>
       <Key>Pickup</Key>
-      <Value>Pickup</Value>
+      <Value>Pegar</Value>
     </Record>
     <Record>
       <Key>Take</Key>
-      <Value>Take</Value>
+      <Value>Levar</Value>
     </Record>
     <Record>
       <Key>Build</Key>
-      <Value>Build</Value>
+      <Value>Construir</Value>
     </Record>
     <Record>
       <Key>Consume</Key>
-      <Value>Consume</Value>
+      <Value>Consumir</Value>
     </Record>
     <Record>
       <Key>ConsumeFail</Key>
-      <Value>Failed: Helmet Closed</Value>
+      <Value>Falhou: Capacete fechado</Value>
     </Record>
     <Record>
       <Key>Plant</Key>
-      <Value>Plant</Value>
+      <Value>Planta</Value>
     </Record>
     <Record>
       <Key>Water</Key>
-      <Value>Water</Value>
+      <Value>Água</Value>
     </Record>
     <Record>
       <Key>Harvest</Key>
-      <Value>Harvest</Value>
+      <Value>Colher</Value>
     </Record>
     <Record>
       <Key>Open</Key>
-      <Value>Open</Value>
+      <Value>Abrir</Value>
     </Record>
     <Record>
       <Key>Close</Key>
-      <Value>Close</Value>
+      <Value>Fechar</Value>
     </Record>
     <Record>
       <Key>Opened</Key>
-      <Value>Opened</Value>
+      <Value>Aberto</Value>
     </Record>
     <Record>
       <Key>Closed</Key>
-      <Value>Closed</Value>
+      <Value>Fechado</Value>
     </Record>
     <Record>
       <Key>Off</Key>
-      <Value>Off</Value>
+      <Value>Desligar</Value>
     </Record>
     <Record>
       <Key>On</Key>
-      <Value>On</Value>
+      <Value>Ligar</Value>
     </Record>
     <Record>
       <Key>Powered</Key>
-      <Value>Powered</Value>
+      <Value>Ligado</Value>
     </Record>
     <Record>
       <Key>Unpowered</Key>
-      <Value>Unpowered</Value>
+      <Value>Desligado</Value>
     </Record>
     <Record>
       <Key>False</Key>
-      <Value>False</Value>
+      <Value>Falso</Value>
     </Record>
     <Record>
       <Key>True</Key>
-      <Value>True</Value>
+      <Value>Verdadeiro</Value>
     </Record>
     <Record>
       <Key>Construct</Key>
-      <Value>Construct</Value>
+      <Value>Construir</Value>
     </Record>
     <Record>
       <Key>Deconstruct</Key>
-      <Value>Deconstruct</Value>
+      <Value>Deconstruir</Value>
     </Record>
     <Record>
       <Key>Disconnect</Key>
-      <Value>Disconnect</Value>
+      <Value>Desconectar</Value>
     </Record>
     <Record>
       <Key>Connect</Key>
-      <Value>Connect</Value>
+      <Value>Conectar</Value>
     </Record>
     <Record>
       <Key>Load</Key>
-      <Value>Load</Value>
+      <Value>Carregar</Value>
     </Record>
     <Record>
       <Key>Unload</Key>
-      <Value>Unload</Value>
+      <Value>Descarregar</Value>
     </Record>
     <Record>
       <Key>GetIn</Key>
@@ -389,51 +388,51 @@
     </Record>
     <Record>
       <Key>Error</Key>
-      <Value>Error</Value>
+      <Value>Erro</Value>
     </Record>
     <Record>
       <Key>Lock</Key>
-      <Value>Lock</Value>
+      <Value>Trancar</Value>
     </Record>
     <Record>
       <Key>Unlock</Key>
-      <Value>Unlock</Value>
+      <Value>Destrancar</Value>
     </Record>
     <Record>
       <Key>Rename</Key>
-      <Value>Rename</Value>
+      <Value>Renomear</Value>
     </Record>
     <Record>
       <Key>Up</Key>
-      <Value>Up</Value>
+      <Value>Cima</Value>
     </Record>
     <Record>
       <Key>Down</Key>
-      <Value>Down</Value>
+      <Value>Baixo</Value>
     </Record>
     <Record>
       <Key>CallElevator</Key>
-      <Value>Call</Value>
+      <Value>Chamar</Value>
     </Record>
     <Record>
       <Key>Set</Key>
-      <Value>Set</Value>
+      <Value>Setar</Value>
     </Record>
     <Record>
       <Key>Cycle</Key>
-      <Value>Cycle</Value>
+      <Value>Ciclo</Value>
     </Record>
     <Record>
       <Key>ForceClose</Key>
-      <Value>Force Close</Value>
+      <Value>Forçar fechar</Value>
     </Record>
     <Record>
       <Key>ForceOpen</Key>
-      <Value>Force Open</Value>
+      <Value>Forçar abrir</Value>
     </Record>
     <Record>
       <Key>Vend</Key>
-      <Value>Vend</Value>
+      <Value>Venda</Value>
     </Record>
     <Record>
       <Key>Link</Key>
@@ -445,7 +444,7 @@
     </Record>
     <Record>
       <Key>ForceFeed</Key>
-      <Value>Force Feed</Value>
+      <Value>Forçar alimentação</Value>
     </Record>
     <Record>
       <Key>FlipRover</Key>
@@ -453,17 +452,17 @@
     </Record>
     <Record>
       <Key>Idle</Key>
-      <Value>Idle</Value>
+      <Value>Parado</Value>
     </Record>
     <Record>
       <Key>Active</Key>
-      <Value>Active</Value>
+      <Value>Ativo</Value>
     </Record>
   </Actions>
   <Things>
     <RecordThing>
       <Key>ApplianceMicrowave</Key>
-      <Value>Microwave</Value>
+      <Value>Micro-ondas</Value>
       <Description>While countless 'better' ways of cooking {LINK:FoodPage;Food} have been invented in the last few hundred years, few are as durable or easy to fabricate as the OK-Zoomer microwave. Licensed from {LINK:Xigo;Xigo}, the plans are based on a classic model from the mid-21st century, giving it a charmingly retro feel. But don't worry, it oscillates {GAS:Water} molecules more than adequately. 
 Just bolt it to a {THING:StructureBench} using a {THING:ItemWrench} to power it, follow the recipe, and you're cooking.</Description>
     </RecordThing>
